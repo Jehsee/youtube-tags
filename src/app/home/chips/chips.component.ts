@@ -4,6 +4,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { ApiService } from "../../service/api.service";
 import { Video } from 'src/app/model/video';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'chips',
@@ -25,6 +26,7 @@ export class ChipsComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(
+    private _snackBar: MatSnackBar,
     private apiService: ApiService, 
     public router: Router) {}
 
@@ -56,7 +58,7 @@ export class ChipsComponent implements OnInit {
   saveVideo() {
     this.apiService.createVideo(this.youtubeUrl,this.tags)
       .subscribe((createdVideo: Video) => {
-        console.log('createdVideo: ',createdVideo);
+        this._snackBar.open('Video and Tags have been saved.','', {duration: 4000})
       },
       (error: ErrorEvent) => {
         this.errorMsg = error.error.message;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { Video } from 'src/app/model/video';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   templateUrl: './search.component.html',
@@ -9,9 +10,15 @@ import { Video } from 'src/app/model/video';
 export class SearchComponent implements OnInit {
   public YT: any;
   public player: any;
+  public allVideos: Array<Video>;
   public videos: Array<Video>;
   public errorMsg: string;
   public columns = ['videoUrls','videoTags','update'];
+
+  length:number;
+  pageSize = 5;
+  pageSizeOptions: number[] = [5,10,25];
+  pageEvent: PageEvent;
 
   constructor(private apiService: ApiService) { }
 
@@ -19,19 +26,14 @@ export class SearchComponent implements OnInit {
     this.initYoutubeScript();
     this.apiService.getVideos()
       .subscribe((videos: Video[]) => {
-        this.videos = videos;
+        this.allVideos = videos;
+        this.length = videos.length;
       },
       (error: ErrorEvent) => {
         this.errorMsg = error.error.message;
       },
       () => {
-        // For some reason, the dom element that the Youtube iframe function is looking for is not available by the time the service is completed. 
-        // I thought ngAfterViewInit should take care of this? but it doesnt. =(
-        // temporary solution - settimeout to make sure the dom elements are rendered before function below runs.
-        setTimeout(()=> {
-          this.loadAllVideos()
-        }, 13)
-        // interesting fact - a team of neuroscientists from MIT has found that the human brain can process entire images that the eye sees for as little as 13 milliseconds, which i set the timeout to.
+        this.loadAllVideos(5, 0)
       })
   }
   
@@ -43,9 +45,14 @@ export class SearchComponent implements OnInit {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);    
   }
 
-  loadAllVideos() {
+  loadAllVideos(pageSize, pageIndex) {
+    let start = pageSize * pageIndex;
+    let end = start + pageSize;
+    this.videos = this.allVideos.slice(start,end)
     this.videos.forEach((p,i) => {
-      this.onYouTubeIframeAPIReady(p,i);
+      setTimeout(() => {
+        this.onYouTubeIframeAPIReady(p,i);
+      }, 13)
     })
   }
 
@@ -73,6 +80,10 @@ export class SearchComponent implements OnInit {
       (error) => {
         this.errorMsg = error.error.message;
       })
+  }
+
+  paginate(event) {
+    this.loadAllVideos(event.pageSize, event.pageIndex)
   }
 
 }

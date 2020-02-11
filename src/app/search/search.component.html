@@ -26,3 +26,9 @@
         <tr mat-row *matRowDef="let videos; columns: columns"></tr>
     </table>
 </mat-card>
+
+<mat-paginator [length]="length"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="pageEvent = paginate($event)">
+</mat-paginator>
