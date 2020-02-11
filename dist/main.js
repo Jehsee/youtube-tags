@@ -84,7 +84,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!-- <mat-spinner *ngIf=\"loading\"></mat-spinner>\n<mat-toolbar *ngIf=\"successMsg\" color=\"accent\">{{ successMsg }}</mat-toolbar>\n<mat-toolbar *ngIf=\"errorMsg\" color=\"warn\">{{ errorMsg }}</mat-toolbar> -->\n\n<mat-card>\n    <table mat-table [dataSource]=\"videos\" class=\"\">\n        <ng-container matColumnDef=\"videoUrls\">\n            <th mat-header-cell *matHeaderCellDef>Video</th>\n            <td mat-cell *matCellDef=\"let video; let i = index\">\n                <h5>{{ video.url }}</h5>\n                <div id=\"player-{{i}}\"></div>\n            </td>\n        </ng-container>\n        <ng-container matColumnDef=\"videoTags\">\n            <th mat-header-cell *matHeaderCellDef>Tags</th>\n            <td mat-cell *matCellDef=\"let video\">\n                <chips [tags]=\"video.tags\"></chips>\n            </td>\n        </ng-container>\n        <ng-container matColumnDef=\"update\">\n            <th mat-header-cell *matHeaderCellDef>Update</th>\n            <td mat-cell *matCellDef=\"let video\"><button (click)=\"updateVideo(video)\" mat-raised-button color=\"accent\">Update</button></td>\n        </ng-container>\n\n        <tr mat-header-row *matHeaderRowDef=\"columns\"></tr>\n        <tr mat-row *matRowDef=\"let videos; columns: columns\"></tr>\n    </table>\n</mat-card>");
+/* harmony default export */ __webpack_exports__["default"] = ("<!-- <mat-spinner *ngIf=\"loading\"></mat-spinner>\n<mat-toolbar *ngIf=\"successMsg\" color=\"accent\">{{ successMsg }}</mat-toolbar>\n<mat-toolbar *ngIf=\"errorMsg\" color=\"warn\">{{ errorMsg }}</mat-toolbar> -->\n\n<mat-card>\n    <table mat-table [dataSource]=\"videos\" class=\"\">\n        <ng-container matColumnDef=\"videoUrls\">\n            <th mat-header-cell *matHeaderCellDef>Video</th>\n            <td mat-cell *matCellDef=\"let video; let i = index\">\n                <h5>{{ video.url }}</h5>\n                <div id=\"player-{{i}}\"></div>\n            </td>\n        </ng-container>\n        <ng-container matColumnDef=\"videoTags\">\n            <th mat-header-cell *matHeaderCellDef>Tags</th>\n            <td mat-cell *matCellDef=\"let video\">\n                <chips [tags]=\"video.tags\"></chips>\n            </td>\n        </ng-container>\n        <ng-container matColumnDef=\"update\">\n            <th mat-header-cell *matHeaderCellDef>Update</th>\n            <td mat-cell *matCellDef=\"let video\"><button (click)=\"updateVideo(video)\" mat-raised-button color=\"accent\">Update</button></td>\n        </ng-container>\n\n        <tr mat-header-row *matHeaderRowDef=\"columns\"></tr>\n        <tr mat-row *matRowDef=\"let videos; columns: columns\"></tr>\n    </table>\n</mat-card>\n\n<mat-paginator [length]=\"length\"\n               [pageSize]=\"pageSize\"\n               [pageSizeOptions]=\"pageSizeOptions\"\n               (page)=\"pageEvent = paginate($event)\">\n</mat-paginator>");
 
 /***/ }),
 
@@ -539,13 +539,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_cdk_keycodes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/cdk/keycodes */ "./node_modules/@angular/cdk/esm2015/keycodes.js");
 /* harmony import */ var _service_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../service/api.service */ "./src/app/service/api.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/snack-bar */ "./node_modules/@angular/material/esm2015/snack-bar.js");
+
 
 
 
 
 
 let ChipsComponent = class ChipsComponent {
-    constructor(apiService, router) {
+    constructor(_snackBar, apiService, router) {
+        this._snackBar = _snackBar;
         this.apiService = apiService;
         this.router = router;
         this.tags = [];
@@ -578,13 +581,14 @@ let ChipsComponent = class ChipsComponent {
     saveVideo() {
         this.apiService.createVideo(this.youtubeUrl, this.tags)
             .subscribe((createdVideo) => {
-            console.log('createdVideo: ', createdVideo);
+            this._snackBar.open('Video and Tags have been saved.', '', { duration: 4000 });
         }, (error) => {
             this.errorMsg = error.error.message;
         });
     }
 };
 ChipsComponent.ctorParameters = () => [
+    { type: _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_5__["MatSnackBar"] },
     { type: _service_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
 ];
@@ -734,6 +738,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/material/snack-bar */ "./node_modules/@angular/material/esm2015/snack-bar.js");
 /* harmony import */ var _angular_material_table__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/material/table */ "./node_modules/@angular/material/esm2015/table.js");
 /* harmony import */ var _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/material/progress-spinner */ "./node_modules/@angular/material/esm2015/progress-spinner.js");
+/* harmony import */ var _angular_material_paginator__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/material/paginator */ "./node_modules/@angular/material/esm2015/paginator.js");
+
 
 
 
@@ -762,7 +768,8 @@ const MaterialComponents = [
     _angular_material_card__WEBPACK_IMPORTED_MODULE_11__["MatCardModule"],
     _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_12__["MatSnackBarModule"],
     _angular_material_table__WEBPACK_IMPORTED_MODULE_13__["MatTableModule"],
-    _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_14__["MatProgressSpinnerModule"]
+    _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_14__["MatProgressSpinnerModule"],
+    _angular_material_paginator__WEBPACK_IMPORTED_MODULE_15__["MatPaginatorModule"]
 ];
 let MaterialModule = class MaterialModule {
 };
@@ -810,22 +817,19 @@ let SearchComponent = class SearchComponent {
     constructor(apiService) {
         this.apiService = apiService;
         this.columns = ['videoUrls', 'videoTags', 'update'];
+        this.pageSize = 5;
+        this.pageSizeOptions = [5, 10, 25];
     }
     ngOnInit() {
         this.initYoutubeScript();
         this.apiService.getVideos()
             .subscribe((videos) => {
-            this.videos = videos;
+            this.allVideos = videos;
+            this.length = videos.length;
         }, (error) => {
             this.errorMsg = error.error.message;
         }, () => {
-            // For some reason, the dom element that the Youtube iframe function is looking for is not available by the time the service is completed. 
-            // I thought ngAfterViewInit should take care of this? but it doesnt. =(
-            // temporary solution - settimeout to make sure the dom elements are rendered before function below runs.
-            setTimeout(() => {
-                this.loadAllVideos();
-            }, 13);
-            // interesting fact - a team of neuroscientists from MIT has found that the human brain can process entire images that the eye sees for as little as 13 milliseconds, which i set the timeout to.
+            this.loadAllVideos(5, 0);
         });
     }
     initYoutubeScript() {
@@ -834,9 +838,14 @@ let SearchComponent = class SearchComponent {
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     }
-    loadAllVideos() {
+    loadAllVideos(pageSize, pageIndex) {
+        let start = pageSize * pageIndex;
+        let end = start + pageSize;
+        this.videos = this.allVideos.slice(start, end);
         this.videos.forEach((p, i) => {
-            this.onYouTubeIframeAPIReady(p, i);
+            setTimeout(() => {
+                this.onYouTubeIframeAPIReady(p, i);
+            }, 13);
         });
     }
     onYouTubeIframeAPIReady(video, index) {
@@ -859,6 +868,9 @@ let SearchComponent = class SearchComponent {
         }, (error) => {
             this.errorMsg = error.error.message;
         });
+    }
+    paginate(event) {
+        this.loadAllVideos(event.pageSize, event.pageIndex);
     }
 };
 SearchComponent.ctorParameters = () => [
