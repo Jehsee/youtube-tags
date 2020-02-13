@@ -16,6 +16,10 @@ export class ApiService {
     return this.http.get<Video[]>(`${this.BASE_URL}/videos`);
   }
 
+  getVideo(id:string): Observable<Video[]> {
+    return this.http.get<Video[]>(`${this.BASE_URL}/videos/${id}`);
+  }
+
   createVideo(url:string, tags: Array<string>): Observable<Video> {
     return this.http.post<Video>(`${this.BASE_URL}/videos`, { url, tags });
   }

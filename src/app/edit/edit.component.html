@@ -1,1 +1,11 @@
-<p>edit works!</p>
+<mat-card class="">
+    <p>{{this.video.url}}</p>
+    <div class="videoWrapper">
+        <div id="player"></div>
+    </div>
+</mat-card>
+
+<mat-card *ngIf="video" class="formCard">
+    <chips [tags]="video.tags"></chips>
+    <button (click)="updateVideo(video)" mat-raised-button color="accent">Update</button>
+</mat-card>

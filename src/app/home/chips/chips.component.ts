@@ -57,8 +57,10 @@ export class ChipsComponent implements OnInit {
 
   saveVideo() {
     this.apiService.createVideo(this.youtubeUrl,this.tags)
-      .subscribe((createdVideo: Video) => {
-        this._snackBar.open('Video and Tags have been saved.','', {duration: 4000})
+      .subscribe((createdVideo:any) => {
+        let id = createdVideo.insertedId;
+        this._snackBar.open('Video Saved!','', {duration: 4000})
+        this.router.navigate([`/edit/${id}`])
       },
       (error: ErrorEvent) => {
         this.errorMsg = error.error.message;
