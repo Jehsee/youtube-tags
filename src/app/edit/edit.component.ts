@@ -22,7 +22,6 @@ export class EditComponent implements OnInit, AfterViewInit {
     this.apiService.getVideo(this.id)
       .subscribe((video)=> {
         this.video = video;
-        console.log('video: ',video);
       })
 
     // 2. This code loads the IFrame Player API code asynchronously.
@@ -61,7 +60,6 @@ export class EditComponent implements OnInit, AfterViewInit {
     this.clicked = true;
     this.apiService.udpateVideo(video._id,video.tags)
       .subscribe((updatedVideo)=> {
-        console.log('updatedVideo: ',updatedVideo);
         this.clicked = false;
         this._snackBar.open('Tags have been updated!', 'Yay', {
           duration: 4000,

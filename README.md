@@ -3,7 +3,7 @@ front - https://youtubetagsdemoapp.herokuapp.com/
 backend API (no view) - https://tagsapi.herokuapp.com/
 
 Please allow some time for Heroku dyno to wake up when first landing on page
-Please allow some time for Heroku dyno to wake up when making the first API call
+Please allow some time for Heroku dyno to wake up when making the first API call such as navigating to the search page or saving a video
 
 # Front
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.
@@ -25,6 +25,7 @@ Run `npm start` to run local back end
 3. Ability to add tags to a youtube url
 4. Ability to update and delete tags to a youtube url
 5. Ability to search for a youtube url
+6. Pagination of list of urls
 
 ## Angular Material
 Component and design based off of Angular Material. https://material.angular.io/

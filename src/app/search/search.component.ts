@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { Video } from 'src/app/model/video';
-import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   templateUrl: './search.component.html',
@@ -18,7 +17,6 @@ export class SearchComponent implements OnInit {
   length:number;
   pageSize = 5;
   pageSizeOptions: number[] = [5,10,25];
-  pageEvent: PageEvent;
 
   constructor(private apiService: ApiService) { }
 

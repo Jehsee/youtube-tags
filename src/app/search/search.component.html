@@ -1,11 +1,7 @@
-<!-- <mat-spinner *ngIf="loading"></mat-spinner>
-<mat-toolbar *ngIf="successMsg" color="accent">{{ successMsg }}</mat-toolbar>
-<mat-toolbar *ngIf="errorMsg" color="warn">{{ errorMsg }}</mat-toolbar> -->
-
 <mat-paginator [length]="length"
                [pageSize]="pageSize"
                [pageSizeOptions]="pageSizeOptions"
-               (page)="pageEvent = paginate($event)">
+               (page)="paginate($event)">
 </mat-paginator>
 
 <mat-card>
