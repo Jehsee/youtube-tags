@@ -13,6 +13,7 @@ export class EditComponent implements OnInit, AfterViewInit {
   public video: any;
   public YT: any;
   public player: any;
+  public clicked: boolean = false;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private _snackBar: MatSnackBar) { }
 
@@ -57,9 +58,11 @@ export class EditComponent implements OnInit, AfterViewInit {
   }
 
   updateVideo(video) {
+    this.clicked = true;
     this.apiService.udpateVideo(video._id,video.tags)
       .subscribe((updatedVideo)=> {
         console.log('updatedVideo: ',updatedVideo);
+        this.clicked = false;
         this._snackBar.open('Tags have been updated!', 'Yay', {
           duration: 4000,
         });

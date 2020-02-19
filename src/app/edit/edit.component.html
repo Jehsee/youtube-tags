@@ -1,11 +1,12 @@
 <mat-card class="">
-    <p>{{this.video.url}}</p>
+    <p class="url">{{video.url}}</p>
     <div class="videoWrapper">
         <div id="player"></div>
     </div>
 </mat-card>
 
-<mat-card *ngIf="video" class="formCard">
+<mat-card class="formCard">
     <chips [tags]="video.tags"></chips>
-    <button (click)="updateVideo(video)" mat-raised-button color="accent">Update</button>
+    <button (click)="updateVideo(video)" mat-raised-button color="accent" [disabled]="clicked">Update</button>
+    <mat-progress-bar class="bar" *ngIf="clicked" mode="indeterminate"></mat-progress-bar>
 </mat-card>

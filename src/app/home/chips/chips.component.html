@@ -2,16 +2,17 @@
 <mat-form-field class="example-chip-list">
     <mat-chip-list #chipList aria-label="Tag selection">
         <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
-                [removable]="removable" (removed)="remove(tag)">
-            {{tag}}
+        [removable]="removable" (removed)="remove(tag)">
+        {{tag}}
         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-        </mat-chip>
-        <input placeholder="Add Tags Here"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
-                (matChipInputTokenEnd)="add($event)">
-    </mat-chip-list>
+    </mat-chip>
+    <input placeholder="Add Tags Here"
+    [matChipInputFor]="chipList"
+    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+    [matChipInputAddOnBlur]="addOnBlur"
+    (matChipInputTokenEnd)="add($event)">
+</mat-chip-list>
 </mat-form-field>      
-<button *ngIf="router.url.includes('home')" mat-raised-button color="accent" class="saveTagsButton float-right" (click)="saveVideo()">Save</button>
+<button *ngIf="router.url.includes('home')" mat-raised-button color="accent" class="saveTagsButton float-right" (click)="saveVideo()" [disabled]="clicked">Save</button>
 <div class="clear"></div>
+<mat-progress-bar *ngIf="clicked" mode="indeterminate"></mat-progress-bar>

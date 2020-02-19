@@ -75,7 +75,6 @@ export class SearchComponent implements OnInit {
   updateVideo(video) {
     this.apiService.udpateVideo(video._id,video.tags)
       .subscribe((updatedVideo)=> {
-        console.log('updatedVideo: ',updatedVideo);
       },
       (error) => {
         this.errorMsg = error.error.message;

@@ -17,6 +17,7 @@ export class ChipsComponent implements OnInit {
   public videos: Array<Video>;
   public errorMsg: string;
   public successMsg: string;
+  public clicked: boolean = false;
 
   visible:boolean = true;
   selectable:boolean = true;
@@ -56,6 +57,7 @@ export class ChipsComponent implements OnInit {
   }
 
   saveVideo() {
+    this.clicked = true;
     this.apiService.createVideo(this.youtubeUrl,this.tags)
       .subscribe((createdVideo:any) => {
         let id = createdVideo.insertedId;
