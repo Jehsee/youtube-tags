@@ -42,3 +42,8 @@ Component and design based off of Angular Material. https://material.angular.io/
 * User can update by adding or removing tags.
 * On successful update, a notification will pop up.
 
+## Search Page
+* A list of videos with tags will show
+* Able to edit tags from within the list
+* List is paginated
+
