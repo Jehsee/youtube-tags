@@ -30,3 +30,15 @@ Run `npm start` to run local back end
 ## Angular Material
 Component and design based off of Angular Material. https://material.angular.io/
 
+## Home Page
+* User can enter a youtube url to load the video.
+* A incorrect url format will have a notification pop up.
+* Ability to save and add tags to video will only show on successful video playback
+* Video will autoplay
+* Pressing enter or comma while inputting tags will separate the tags
+* On submission of video, user is taken to the video edit page
+
+## Edit Page
+* User can update by adding or removing tags.
+* On successful update, a notification will pop up.
+
